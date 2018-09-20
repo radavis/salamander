@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Salamander: Catalog items by UPC
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
+    = stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons"
+    = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    = stylesheet_link_tag "application", media: "all"
+
+  %body
+
+    %nav
+      .nav-wrapper
+        %a.brand-logo{href: "#!"}
+          %i.material-icons.mls disc_full
+          Salamander
+        %ul.right.hide-on-med-and-down
+          %li
+            %a{href: "#!"}
+              %i.material-icons search
+          %li
+            = link_to "Add/Search Products", new_product_path
+          %li
+            = link_to "View Products", products_path
+          %li
+            - if current_user
+              = link_to "Sign out", session_path(current_user), method: :delete
+            - else
+              = link_to "Sign in", new_session_path
+
+    .container
+      = yield
+
+    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+    = javascript_include_tag "application"
+    - flash.each do |message_type, message|
+      = javascript_tag "M.toast({ html: '#{message}', classes: '#{message_type}', displayLength: 4000 });"

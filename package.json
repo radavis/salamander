@@ -1,0 +1,12 @@
+{
+  "name": "salamander",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "materialize-css": "^1.0.0",
+    "node-sass": "^4.9.3"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
+}

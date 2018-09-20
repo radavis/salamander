@@ -1,0 +1,8 @@
+- if @omniauth_error.present?
+  = render "omniauth_error"
+
+.row
+  .col.s6.offset-s3.mts
+    %a.btn.deep-orange.accent-4.waves-effect.waves-light{href: "/auth/google_oauth2"}
+      %i.fi-social-google-plus
+      Sign in with Google

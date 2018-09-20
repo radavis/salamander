@@ -1,0 +1,35 @@
+/*
+m, p: margin, padding
+a, t, r, b, l, h, v: all, top, right, bottom, left, horizontal, vertical
+s, m, l, n: small, medium, large, none
+*/
+
+$n: 0;
+$s: 15px;
+$m: $s * 2;
+$l: $m * 2;
+$type: m margin, p padding;
+$top: t v a;
+$right: r h a;
+$bottom: b v a;
+$left: l h a;
+$dirs: top $top, right $right, bottom $bottom, left $left;
+$size: n $n, s $s, m $m, l $l;
+
+@each $t in $type {
+  @each $d in $dirs {
+    @each $s in $size {
+      .#{nth($t,1)}#{nth(nth($d,2),1)}#{nth($s,1)}, .#{nth($t,1)}#{nth(nth($d,2),2)}#{nth($s,1)}, .#{nth($t,1)}#{nth(nth($d,2),3)}#{nth($s,1)} {
+          #{nth($t,2)}-#{nth($d,1)}: #{nth($s,2)} !important;
+      }
+    }
+  }
+}
+
+.mra, .mha {
+  margin-right: auto !important
+}
+
+.mla, .mha {
+  margin-left: auto !important
+}

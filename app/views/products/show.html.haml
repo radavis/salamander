@@ -1,0 +1,5 @@
+%h1= "Product UPC ##{@product.upc}"
+%p= @product.title
+= image_tag @product.image_url if @product.image_url
+%pre
+  %code= JSON.pretty_generate(@product.data)

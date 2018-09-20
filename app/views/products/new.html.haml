@@ -1,0 +1,16 @@
+%h1 New Product
+
+= form_with(model: @product, local: true) do |form|
+  - if @product.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@product.errors.count, "error")
+        prohibited this movie from being saved:
+      %ul
+        - @product.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :upc, "UPC"
+    = form.text_field :upc
+  .actions
+    = form.submit "Submit", class: "btn"
