@@ -10,9 +10,9 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.find_or_initialize_by(upc: upc)
-    LookupProductJob.perform_later(upc) if !@product.persisted?
 
     if @product.save
+      LookupProductJob.perform_later(@product) if @product.json_data.nil?
       redirect_to @product, notice: "Product UPC ##{upc} was saved."
     else
       render :new, alert: @product.errors.full_messages.join(". ")

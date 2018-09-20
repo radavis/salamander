@@ -3,7 +3,16 @@ class Product < ApplicationRecord
   validates :upc, uniqueness: true
 
   def data
-    JSON.parse(json_data)
+    JSON.parse(json_data || "{}")
+  end
+
+  def fetch_data
+    walmart_product = WalmartProduct.new(upc)
+    return false unless walmart_product.found?
+    self.title = walmart_product.title
+    self.image_url = walmart_product.image_url
+    self.json_data = walmart_product.json_text
+    self
   end
 
   def short_title
@@ -13,6 +22,6 @@ class Product < ApplicationRecord
   end
 
   def to_s
-    "Product ##{id}, UPC: #{upc}, Title: #{title}"
+    "UPC: #{upc}, Title: #{title}"
   end
 end
